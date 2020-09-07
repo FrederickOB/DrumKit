@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="main.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div data-key="65" class="buttons">
+        <h1>A</h1>
+        <span>CLAP</span>
+      </div>
+      <div data-key="83" class="buttons">
+        <h1>S</h1>
+        <span>HIHAT</span>
+      </div>
+      <div data-key="68" class="buttons">
+        <h1>D</h1>
+        <span>KICK</span>
+      </div>
+      <div data-key="70" class="buttons">
+        <h1>F</h1>
+        <span>OPENHAT</span>
+      </div>
+      <div data-key="71" class="buttons">
+        <h1>G</h1>
+        <span>BOOM</span>
+      </div>
+      <div data-key="72" class="buttons">
+        <h1>H</h1>
+        <span>RIDE</span>
+      </div>
+      <div data-key="74" class="buttons">
+        <h1>J</h1>
+        <span>SNARE</span>
+      </div>
+      <div data-key="75" class="buttons">
+        <h1>K</h1>
+        <span>TOM</span>
+      </div>
+      <div data-key="76" class="buttons">
+        <h1>L</h1>
+        <span>Tink</span>
+      </div>
+    </div>
+
+    <audio data-key="65" src=""></audio>
+    <audio data-key="83" src=""></audio>
+    <audio data-key="68" src=""></audio>
+    <audio data-key="70" src=""></audio>
+    <audio data-key="71" src=""></audio>
+    <audio data-key="72" src=""></audio>
+    <audio data-key="74" src=""></audio>
+    <audio data-key="75" src=""></audio>
+    <audio data-key="76" src=""></audio>
+
+    <script>
+      window.addEventListener("keydown", function (e) {
+        const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+        const key = document.querySelector(`.buttons[data-key="${e.keyCode}"]`);
+
+        if (!audio) return; // stop function if keyCode isnt part of selected ones
+        // audio.currentTime = 0; //allows for sound to repeat as and when pressed (rewind to start)
+        // audio.play(); // comments because i dont have audio files
+
+        key.classList.add("selected");
+      });
+
+      function removeTransition(e) {
+        if (e.propertyName !== "transform") return;
+        console.log(e.propertyName);
+        this.classList.remove("selected");
+      }
+
+      const keys = document.querySelectorAll(".buttons");
+      keys.forEach((key) =>
+        key.addEventListener("transitionend", removeTransition)
+      );
+      console.log(keys);
+    </script>
+  </body>
+</html>
